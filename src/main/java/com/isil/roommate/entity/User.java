@@ -17,8 +17,10 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import com.isil.roommate.entity.UserRole;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -52,19 +54,11 @@ public class User implements UserDetails {
     private String password;
 
     /**
-     * Enumeración que representa los roles del usuario.
-     */
-    public enum Rol {
-        ADMIN,
-        RECEPCIONISTA
-    }
-
-    /**
      * Rol del usuario.
      */
     @NotNull
     @Enumerated(EnumType.STRING)
-    private Rol rol;
+    private UserRole role;
 
     /**
      * Devuelve las autoridades del usuario, en este caso, el rol con el prefijo "ROLE_".
@@ -73,7 +67,7 @@ public class User implements UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + this.rol.name()));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
     }
 
     /**
