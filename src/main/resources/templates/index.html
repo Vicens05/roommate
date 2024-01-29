@@ -6,27 +6,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <div th:replace="fragments/header :: header"></div>
-        <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Bienvenido, <span th:text="${#authentication.principal.username}"></span>!</h1>
-                        </div>
+<div class="wrapper">
+    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/sidebar :: sidebar"></div>
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Bienvenido, <span th:text="${#authentication.principal.username}"></span>!</h1>
                     </div>
                 </div>
             </div>
+        </div>
             <div class="content">
+                <!--/*
+                    Este bloque Thymeleaf se encarga de dinámicamente reemplazar el contenido
+                    dentro del contenedor con la clase "container-fluid" por el contenido de la vista
+                    específica indicada por la variable "view". La expresión Thymeleaf
+                    "__${view}__ :: content" se interpreta para renderizar el contenido de la vista 
+                    correspondiente, lo que permite cambiar dinámicamente la página principal 
+                    según el contexto de la aplicación, como la autenticación del usuario o las acciones
+                    realizadas en el sistema.
+                */-->
                 <div class="container-fluid">
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <div th:replace="admin/index :: content"></div>
-                    </div>
-                    <div sec:authorize="hasRole('ROLE_RECEPCIONISTA')">
-                        <div th:replace="recep/index :: content"></div>
-                    </div>
+                    <div th:replace="__${view}__ :: content"></div>
                 </div>
             </div>
         </div>
