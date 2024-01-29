@@ -67,9 +67,17 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * Maneja la solicitud POST para el endpoint "/admin/usuarios/crear", procesando la creación de un nuevo usuario.
+     * Verifica si el usuario ya existe y realiza las acciones correspondientes, redirigiendo según el resultado.
+     *
+     * @param red   Instancia de {@link RedirectAttributes} para añadir atributos a la redirección.
+     * @param user  Objeto {@link User} representando los datos del nuevo usuario.
+     * @return La redirección a la página principal ("/") con los atributos específicos según el resultado de la operación.
+     */
     @PostMapping("/usuarios/crear")
     public String create(RedirectAttributes red, @ModelAttribute User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // ugly way
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser != null) {
             red.addFlashAttribute("errmsg", "¡Error! El usuario ya existe.");
@@ -81,4 +89,5 @@ public class UserController {
         }
         return "redirect:/";
     }
+
 }
