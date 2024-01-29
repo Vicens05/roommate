@@ -46,26 +46,6 @@
         </footer>
     </div>
     <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
-    <script th:src="@{/js/adminlte.min.js}"></script>
-    <div th:if="${errmsg != null}">
-        <script th:src="@{/js/sweetalert2.min.js}"></script>
-        <script th:src="@{/js/toastr.min.js}"></script>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-             $(function() {
-                var Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000
-                });
-                Toast.fire({
-                    icon: 'error',
-                    title: /*[[${errmsg}]]*/ "",
-                });
-              });
-            /*]]>*/
-        </script>
-    </div>
+    <script th:src="@{/js/adminlte.min.js?v=3.2.0}"></script>
 </body>
 </html>

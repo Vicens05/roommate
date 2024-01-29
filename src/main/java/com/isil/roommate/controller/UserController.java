@@ -73,6 +73,7 @@ public class UserController {
         User existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser != null) {
             red.addFlashAttribute("errmsg", "¡Error! El usuario ya existe.");
+            red.addFlashAttribute("user", user);
             red.addFlashAttribute("view", "admin/create");
         } else {
             userRepository.save(user);
